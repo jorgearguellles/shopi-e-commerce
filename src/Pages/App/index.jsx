@@ -1,5 +1,5 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
-import { ShoppingContextProvider } from "../../Context";
+import { ShoppingCarContextProvider } from "../../Context";
 import { Home } from "../Home";
 import { MyAccount } from "../MyAccount";
 import { MyOrders } from "../MyOrders";
@@ -23,12 +23,12 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ShoppingContextProvider>
+    <ShoppingCarContextProvider>
       <BrowserRouter>
         <Navbar />
         <AppRoutes />
       </BrowserRouter>
-    </ShoppingContextProvider>
+    </ShoppingCarContextProvider>
   );
 };
 

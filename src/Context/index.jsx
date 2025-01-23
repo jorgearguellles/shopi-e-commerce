@@ -1,17 +1,30 @@
 import { createContext, useState } from "react";
 
-export const ShoppingContext = createContext();
+export const ShoppingCarContext = createContext();
 
-export const ShoppingContextProvider = ({ children }) => {
-  const [cartCounter, setCartCounter] = useState(0);
+export const ShoppingCarContextProvider = ({ children }) => {
+  const [carCounter, setCarCounter] = useState(0);
+  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+  const [productToSHow, setProductToSHow] = useState({});
 
-  const addProductToCart = () => {
-    setCartCounter(cartCounter + 1);
-  };
+  const addProductToCar = () => setCarCounter(carCounter + 1);
+  const openProductDetail = () => setIsProductDetailOpen(true);
+  const closeProductDetail = () => setIsProductDetailOpen(false);
+  const collectProductInfo = (productInfo) => setProductToSHow(productInfo);
 
   return (
-    <ShoppingContext.Provider value={{ cartCounter, addProductToCart }}>
+    <ShoppingCarContext.Provider
+      value={{
+        carCounter,
+        addProductToCar,
+        openProductDetail,
+        closeProductDetail,
+        isProductDetailOpen,
+        collectProductInfo,
+        productToSHow,
+      }}
+    >
       {children}
-    </ShoppingContext.Provider>
+    </ShoppingCarContext.Provider>
   );
 };
