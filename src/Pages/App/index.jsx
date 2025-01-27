@@ -1,12 +1,12 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
-import { ShoppingCarContextProvider } from "../../Context";
+import { ShoppingContext } from "../../Context";
 import { Home } from "../Home";
 import { MyAccount } from "../MyAccount";
 import { MyOrders } from "../MyOrders";
 import { NotFound } from "../NotFound";
 import { SignIn } from "../SignIn";
 import { Navbar } from "../../components/Navbar";
-
+import { CheckoutSideMenu } from "../../components/CheckoutSideMenu";
 import "./App.css";
 
 const AppRoutes = () => {
@@ -23,12 +23,13 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ShoppingCarContextProvider>
+    <ShoppingContext>
       <BrowserRouter>
         <Navbar />
         <AppRoutes />
+        <CheckoutSideMenu />
       </BrowserRouter>
-    </ShoppingCarContextProvider>
+    </ShoppingContext>
   );
 };
 

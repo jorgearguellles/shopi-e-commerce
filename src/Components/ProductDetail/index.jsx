@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { ShoppingCarContext } from "../../Context";
+import { ShopContext } from "../../Context";
 
 export const ProductDetail = () => {
-  const { closeProductDetail, isProductDetailOpen, productToSHow } =
-    useContext(ShoppingCarContext);
+  const { closeProductDetail, isProductDetailOpen, productToShow } =
+    useContext(ShopContext);
 
-  const { title, price, images, description } = productToSHow;
+  const { title, price, image, description } = productToShow;
 
   const shouldShowAside = () => (isProductDetailOpen ? "flex" : "hidden");
 
@@ -23,11 +23,7 @@ export const ProductDetail = () => {
         </div>
       </div>
       <figure className="px-6 flex flex-col overflow-y-auto">
-        <img
-          className="w-full h-full rounded-lg"
-          src={images && images[0]}
-          alt={title}
-        />
+        <img className="w-full h-full rounded-lg" src={image} alt={title} />
         <p className="flex flex-col p-6">
           <span className="font-medium text-2xl mb-4">${price}</span>
           <span className="font-medium text-md mb-2">{title}</span>
