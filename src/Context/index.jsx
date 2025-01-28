@@ -34,9 +34,13 @@ export const ShoppingContext = ({ children }) => {
       prevCartProducts.filter((product) => product.id !== productId);
     setCartProducts(filteredProduct);
   };
+  // Function to know Total price to pay into Cart (Side Section)
   const totalToPay = (cartProducts) => {
     return cartProducts?.reduce((sum, product) => sum + product.price, 0);
   };
+
+  // ShoppingCart Order
+  const [order, setOrder] = useState([]);
 
   return (
     <ShopContext.Provider
@@ -52,7 +56,10 @@ export const ShoppingContext = ({ children }) => {
         openMyOrder,
         closeMyOrder,
         cartProducts,
+        setCartProducts,
         totalToPay,
+        order,
+        setOrder,
       }}
     >
       {children}

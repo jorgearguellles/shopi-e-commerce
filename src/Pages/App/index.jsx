@@ -3,10 +3,12 @@ import { ShoppingContext } from "../../Context";
 import { Home } from "../Home";
 import { MyAccount } from "../MyAccount";
 import { MyOrders } from "../MyOrders";
+import { MyOrder } from "../MyOrder";
 import { NotFound } from "../NotFound";
 import { SignIn } from "../SignIn";
 import { Navbar } from "../../components/Navbar";
-import { CheckoutSideMenu } from "../../components/CheckoutSideMenu";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
+
 import "./App.css";
 
 const AppRoutes = () => {
@@ -14,6 +16,8 @@ const AppRoutes = () => {
     { path: "/", element: <Home /> },
     { path: "/my-account", element: <MyAccount /> },
     { path: "/my-orders", element: <MyOrders /> },
+    { path: "/my-orders/last", element: <MyOrder /> },
+    { path: "/my-orders/:id", element: <MyOrder /> },
     { path: "/sign-in", element: <SignIn /> },
     { path: "/*", element: <NotFound /> },
   ]);
