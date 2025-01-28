@@ -10,7 +10,7 @@ export const MyOrders = () => {
   return (
     <Layout>
       <div className="flex justify-center w-80 items-center relative mb-4">
-        <h1>My Orders</h1>
+        <h1 className="font-medium text-2xl">My Orders</h1>
       </div>
       {order.map((order, index) => {
         return (
