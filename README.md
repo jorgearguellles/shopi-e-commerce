@@ -70,4 +70,4 @@ src/
 ## Licenses
 This project is open-source and available under the MIT License. See the LICENSE file for more details.
 
-Developed by: Jorge Arguelles
+## Developed by: [Jorge Arguelles](https://www.linkedin.com/in/jorgeariasarguelles/)
