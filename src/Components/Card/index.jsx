@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import { ShopContext } from "../../Context";
 
-export const Card = (productInfo) => {
-  const { id, category, title, price, image, description } =
-    productInfo.productInfo;
+export const Card = ({ productInfo }) => {
+  const { id, category, title, price, image } = productInfo;
   const {
     openProductDetail,
     closeProductDetail,
@@ -13,56 +12,43 @@ export const Card = (productInfo) => {
     cartProducts,
   } = useContext(ShopContext);
 
-  const showProduct = (productInfo) => {
+  // Show product details
+  const showProduct = () => {
     openProductDetail();
     collectProductInfo(productInfo);
   };
 
-  const updateCounterAndProductsCart = (event, productInfo) => {
+  // Add product to cart and update UI
+  const handleAddToCart = (event) => {
     event.stopPropagation();
     openMyOrder();
     addProductToCart(productInfo);
     closeProductDetail();
   };
 
-  const renderIcon = ({ id, category, title, price, image, description }) => {
-    const isInCart =
-      cartProducts.filter((product) => product.id === id).length > 0;
+  // Render the cart icon based on whether the product is in the cart
+  const renderCartIcon = () => {
+    const isInCart = cartProducts.some((product) => product.id === id);
 
-    if (isInCart) {
-      return (
-        <div className="absolute top-0 right-0 flex justify-center items-center bg-emerald-400 text-white w-6 h-6 rounded-full m-2 p-1 z-1">
-          ✓
-        </div>
-      );
-    } else {
-      return (
-        <div
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1 hover:bg-blue-100 z-1"
-          onClick={(event) => {
-            updateCounterAndProductsCart(event, {
-              id,
-              category,
-              title,
-              price,
-              image,
-              description,
-            });
-          }}
-        >
-          +
-        </div>
-      );
-    }
+    return isInCart ? (
+      <div className="absolute top-0 right-0 flex justify-center items-center bg-emerald-400 text-white w-6 h-6 rounded-full m-2 p-1 z-1">
+        ✓
+      </div>
+    ) : (
+      <div
+        className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1 hover:bg-blue-100 z-1"
+        onClick={handleAddToCart}
+      >
+        +
+      </div>
+    );
   };
 
   return (
     <div
       className="bg-white cursor-pointer w-56 h-60 rounded-lg hover:shadow-xl shadow-blue-500/50"
       key={id}
-      onClick={() =>
-        showProduct({ id, category, title, price, image, description })
-      }
+      onClick={showProduct}
     >
       <figure className="relative mb-2 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5 backdrop-blur-sm bg-opacity-50">
@@ -73,14 +59,7 @@ export const Card = (productInfo) => {
           src={image}
           alt={title}
         />
-        {renderIcon({
-          id,
-          category,
-          title,
-          price,
-          image,
-          description,
-        })}
+        {renderCartIcon()}
       </figure>
       <p className="flex justify-between">
         <span className="text-sm font-light truncate">{title}</span>

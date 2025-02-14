@@ -1,20 +1,39 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../../Context";
 
 export const Navbar = () => {
   const activeStyle = "underline underline-offset-4";
-  const { cartProducts } = useContext(ShopContext);
+  const { cartProducts, setSearchByCategory } = useContext(ShopContext);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Detecta el scroll para cambiar el fondo de la navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="flex justify-between item-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light">
-      <ul className="flex item-center gap-3">
+    <nav
+      className={`fixed top-0 w-full py-5 px-8 text-sm font-light z-10 flex justify-between items-center transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      }`}
+    >
+      {/* Sección izquierda */}
+      <ul className="flex items-center gap-3">
         <li className="font-bold text-lg leading-none">
-          <NavLink to="/">Shopi</NavLink>
+          <NavLink to="/" onClick={() => setSearchByCategory()}>
+            Shopi
+          </NavLink>
         </li>
         <li>
           <NavLink
-            to="/all"
+            to="/"
+            onClick={() => setSearchByCategory()}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             All
@@ -22,15 +41,26 @@ export const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/clothes"
+            to="/men-clothes"
+            onClick={() => setSearchByCategory("men's clothing")}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
-            Clothes
+            Man Clothes
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/women-clothes"
+            onClick={() => setSearchByCategory("women's clothing")}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Women Clothes
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/electronics"
+            onClick={() => setSearchByCategory("electronics")}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Electronics
@@ -38,31 +68,17 @@ export const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/furniture"
+            to="/jewelery"
+            onClick={() => setSearchByCategory("jewelery")}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
-            Furniture
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/toys"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Toys
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/others"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Others
+            Jewelery
           </NavLink>
         </li>
       </ul>
 
-      <ul className="flex item-center gap-3">
+      {/* Sección derecha */}
+      <ul className="flex items-center gap-3">
         <li className="text-black/40">jorge@email.com</li>
         <li>
           <NavLink

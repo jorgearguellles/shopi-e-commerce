@@ -1,65 +1,164 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ShopContext = createContext();
 
 export const ShoppingContext = ({ children }) => {
-  // State to control whether the product detail view is open or closed.
+  /**
+   * UI State Management
+   * Controls visibility of product details and order summary
+   */
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
-  // Function to open the product detail view.
+  const [isMyOrderOpen, setIsMyOrderOpen] = useState(false);
+
+  // Functions to toggle product detail view
   const openProductDetail = () => setIsProductDetailOpen(true);
-  // Function to close the product detail view.
   const closeProductDetail = () => setIsProductDetailOpen(false);
 
-  // State to control whether checkout view is open or closed.
-  const [isMyOrderOpen, setIsMyOrderOpen] = useState(false);
-  // Function to open checkout view.
+  // Functions to toggle order summary view
   const openMyOrder = () => setIsMyOrderOpen(true);
-  // Function to close checkout view.
   const closeMyOrder = () => setIsMyOrderOpen(false);
 
-  // State to store information about the selected product.
+  /**
+   * Product Selection
+   * Stores the product selected by the user
+   */
   const [productToShow, setProductToShow] = useState({});
-  // Function to update the state with the selected product's information.
   const collectProductInfo = (productInfo) => setProductToShow(productInfo);
 
-  // State to store product into Cart
+  /**
+   * Shopping Cart State
+   * Manages products in the cart and calculates total price
+   */
   const [cartProducts, setCartProducts] = useState([]);
-  // Function to add product into Cart
+
+  // Adds a product to the cart
   const addProductToCart = (productInfo) => {
     setCartProducts([...cartProducts, productInfo]);
   };
-  // Function to remove product into Cart
+
+  // Removes a product from the cart by its ID
   const removeProductFromCart = (productId) => {
-    let filteredProduct = (prevCartProducts) =>
-      prevCartProducts.filter((product) => product.id !== productId);
-    setCartProducts(filteredProduct);
+    setCartProducts((prevCartProducts) =>
+      prevCartProducts.filter((product) => product.id !== productId)
+    );
   };
-  // Function to know Total price to pay into Cart (Side Section)
+
+  // Calculates the total amount to be paid
   const totalToPay = (cartProducts) => {
     return cartProducts?.reduce((sum, product) => sum + product.price, 0);
   };
 
-  // ShoppingCart Order
+  /**
+   * Order History
+   * Stores the list of orders placed by the user
+   */
   const [order, setOrder] = useState([]);
+
+  /**
+   * Product Fetching and Filtering
+   * Retrieves products from API and manages search filters
+   */
+  const [items, setItems] = useState(null);
+  const [filteredItems, setFilteredItems] = useState(null);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
+
+  // Search filters
+  const [searchByTitle, setSearchByTitle] = useState("");
+  const [searchByCategory, setSearchByCategory] = useState("");
+
+  // Filters items by title
+  const filteredItemsByTitle = (items, searchByTitle) => {
+    return items?.filter((item) =>
+      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+    );
+  };
+
+  // Filters items by category
+  const filteredItemsByCategory = (items, searchByCategory) => {
+    return items?.filter(
+      (item) =>
+        item.category.toLowerCase().trim() ===
+        searchByCategory.toLowerCase().trim()
+    );
+  };
+
+  // Applies filtering based on search type
+  const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+    if (searchType === "BY_TITLE") {
+      return filteredItemsByTitle(items, searchByTitle);
+    }
+    if (searchType === "BY_CATEGORY") {
+      return filteredItemsByCategory(items, searchByCategory);
+    }
+    if (searchType === "BY_TITLE_AND_CATEGORY") {
+      return filteredItemsByCategory(items, searchByCategory).filter((item) =>
+        item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+      );
+    }
+    return items;
+  };
+
+  // Updates the filtered items whenever search criteria change
+  useEffect(() => {
+    if (searchByTitle && searchByCategory)
+      setFilteredItems(
+        filterBy(
+          "BY_TITLE_AND_CATEGORY",
+          items,
+          searchByTitle,
+          searchByCategory
+        )
+      );
+    else if (searchByTitle)
+      setFilteredItems(
+        filterBy("BY_TITLE", items, searchByTitle, searchByCategory)
+      );
+    else if (searchByCategory)
+      setFilteredItems(
+        filterBy("BY_CATEGORY", items, searchByTitle, searchByCategory)
+      );
+    else setFilteredItems(items);
+  }, [items, searchByTitle, searchByCategory]);
 
   return (
     <ShopContext.Provider
       value={{
+        // UI state
+        isProductDetailOpen,
         openProductDetail,
         closeProductDetail,
-        isProductDetailOpen,
-        collectProductInfo,
-        productToShow,
-        addProductToCart,
-        removeProductFromCart,
         isMyOrderOpen,
         openMyOrder,
         closeMyOrder,
+
+        // Product selection
+        productToShow,
+        collectProductInfo,
+
+        // Shopping cart
         cartProducts,
         setCartProducts,
+        addProductToCart,
+        removeProductFromCart,
         totalToPay,
+
+        // Order history
         order,
         setOrder,
+
+        // Product fetching and filtering
+        items,
+        setItems,
+        searchByTitle,
+        setSearchByTitle,
+        searchByCategory,
+        setSearchByCategory,
+        filteredItems,
       }}
     >
       {children}
