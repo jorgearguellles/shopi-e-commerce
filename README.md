@@ -27,10 +27,12 @@ Shopi E-Commerce is a modern e-commerce website built with React and Vite. This 
 4. Open your browser and visit ```http://localhost:3000```
 
 ## Technologies
-- React: A JavaScript library for building user interfaces.
-- Vite: A build tool for modern web projects that provides fast development startup.
-- Tailwind CSS: A utility-first CSS framework for creating custom designs quickly.
-- ESLint: A static code analysis tool for identifying problematic patterns in JavaScript code.
+
+- **[React](https://reactjs.org/)**: A JavaScript library for building user interfaces, focused on creating reusable components and managing state.
+- **[Vite](https://vitejs.dev/)**: A build tool designed to provide fast development start-up and optimized build processes for modern web applications.
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for creating custom designs quickly without writing custom CSS.
+- **[ESLint](https://eslint.org/)**: A static code analysis tool used to identify problematic patterns in JavaScript code and enforce coding standards.
+
 
 ## Project Structure
 ```css
