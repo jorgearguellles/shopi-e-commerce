@@ -2,6 +2,19 @@
 
 Shopi E-Commerce is a modern e-commerce website built with React and Vite. This project demonstrates a clean, functional front-end structure with a focus on performance and maintainability, utilizing modern JavaScript practices and styling with Tailwind CSS.
 
+## Previews
+
+![Home](https://github.com/jorgearguellles/shopi-e-commerce/blob/main/public/1.png)
+---
+![Product detail](https://github.com/jorgearguellles/shopi-e-commerce/blob/main/public/2.png)
+---
+![Cart Side](https://github.com/jorgearguellles/shopi-e-commerce/blob/main/public/3.png)
+---
+![Checkout](https://github.com/jorgearguellles/shopi-e-commerce/blob/main/public/4.png)
+---
+![My Orders](https://github.com/jorgearguellles/shopi-e-commerce/blob/main/public/5.png)
+
+
 ## Table of Contents
 
 1. [Installation](#installation)
