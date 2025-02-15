@@ -54,12 +54,13 @@ src/
 - Product Detail Page: Displays detailed information about each product.
 
 ## 5. Best Practices and Patterns
-- JavaScript: React Functional Components: Employed functional components with hooks (like useState, useEffect, and useContext) to maintain state and manage side-effects.
+### JavaScript:
+- React Functional Components: Employed functional components with hooks (like useState, useEffect, and useContext) to maintain state and manage side-effects.
 - Component Reusability: Components like Card, Navbar, and ProductDetail are modular, reusable, and easily extendable.
 - Context API: The ShopContext is used for global state management, making it easier to manage states like the search query and filtered product list across multiple components.
 - Event Handlers: Utilized clear and concise functions for handling events, such as handleChange and handleSearch, following a consistent pattern for readability.
 - Error Handling: Conditional rendering (?.length > 0) is used to handle the possibility of missing or empty data gracefully.
-- Styling:
+### Styling:
   - Tailwind CSS: Tailwind was chosen to quickly create a custom design without writing a lot of custom CSS. It allows for responsive designs and minimizes the need for redundant styles.
   - Utility-First Approach: Utilized Tailwind's utility classes for styling, ensuring fast prototyping and minimal CSS bloat.
   - Responsive Design: The project makes extensive use of Tailwind’s responsive utilities (like sm:, md:) to ensure the application is optimized for mobile and desktop views.
