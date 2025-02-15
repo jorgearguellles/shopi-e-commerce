@@ -4,29 +4,29 @@ Shopi E-Commerce is a modern e-commerce website built with React and Vite. This 
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Technologies](#technologies)
-- [Project Structure](#project-structure)
-- [Features](#features)
-- [Best Practices and Patterns](#best-practices-and-patterns)
-- [Licenses](#licenses)
+1. [Installation](#installation)
+2. [Technologies](#technologies)
+3. [Project Structure](#project-structure)
+4. [Features](#features)
+5. [Best Practices and Patterns](#best-practices-and-patterns)
+6. [Licenses](#licenses)
 
-## Installation
+## 1. Installation
 
-1. Clone the repository:
+- Clone the repository:
    ```bash
    git clone https://github.com/jorgearguellles/shopi-e-commerce.git
    cd shopi-e-commerce
 
-2. Install dependencies:
+- Install dependencies:
 ```bash npm install```
 
-3. Run the development server:
+- Run the development server:
 ```bash npm run dev```
 
-4. Open your browser and visit ```http://localhost:3000```
+- Open your browser and visit ```http://localhost:3000```
 
-## Technologies
+## 2. Technologies
 
 - **[React](https://reactjs.org/)**: A JavaScript library for building user interfaces, focused on creating reusable components and managing state.
 - **[Vite](https://vitejs.dev/)**: A build tool designed to provide fast development start-up and optimized build processes for modern web applications.
@@ -34,7 +34,7 @@ Shopi E-Commerce is a modern e-commerce website built with React and Vite. This 
 - **[ESLint](https://eslint.org/)**: A static code analysis tool used to identify problematic patterns in JavaScript code and enforce coding standards.
 
 
-## Project Structure
+## 3. Project Structure
 ```css
 src/
 ├── Components/
@@ -51,12 +51,12 @@ src/
     └── main.css
 ```
 
-## Features
+## 4. Features
 - Search and Filter Products: Users can search for products by title and filter items.
 - Responsive Design: Built with Tailwind CSS to be fully responsive across devices.
 - Product Detail Page: Displays detailed information about each product.
 
-## Best Practices and Patterns
+## 5. Best Practices and Patterns
 - JavaScript: React Functional Components: Employed functional components with hooks (like useState, useEffect, and useContext) to maintain state and manage side-effects.
 - Component Reusability: Components like Card, Navbar, and ProductDetail are modular, reusable, and easily extendable.
 - Context API: The ShopContext is used for global state management, making it easier to manage states like the search query and filtered product list across multiple components.
@@ -67,7 +67,7 @@ src/
   - Utility-First Approach: Utilized Tailwind's utility classes for styling, ensuring fast prototyping and minimal CSS bloat.
   - Responsive Design: The project makes extensive use of Tailwind’s responsive utilities (like sm:, md:) to ensure the application is optimized for mobile and desktop views.
 
-## Licenses
+## 6. Licenses
 This project is open-source and available under the MIT License. See the LICENSE file for more details.
 
 ## Developed by: [Jorge Arguelles](https://www.linkedin.com/in/jorgeariasarguelles/)
