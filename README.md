@@ -13,16 +13,13 @@ Shopi E-Commerce is a modern e-commerce website built with React and Vite. This 
 
 ## 1. Installation
 
-- Clone the repository:
-   ```bash
-   git clone https://github.com/jorgearguellles/shopi-e-commerce.git
-   cd shopi-e-commerce
+- Clone the repository: ```git clone https://github.com/jorgearguellles/shopi-e-commerce.git && cd shopi-e-commerce```
 
 - Install dependencies:
-```bash npm install```
+```npm install```
 
 - Run the development server:
-```bash npm run dev```
+```npm run dev```
 
 - Open your browser and visit ```http://localhost:3000```
 
