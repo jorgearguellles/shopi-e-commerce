@@ -2,7 +2,39 @@ import { createContext, useState, useEffect } from "react";
 
 export const ShopContext = createContext();
 
+export const initializeLocalStorage = () => {
+  // Retrieve stored values from localStorage
+  const accountInLocalStorage = localStorage.getItem("account");
+  const signOutInLocalStorage = localStorage.getItem("sign-out");
+  let parsedAccount;
+  let parsedSignOut;
+
+  // Check if "account" exists in localStorage
+  if (!accountInLocalStorage) {
+    // If not, initialize it with an empty object
+    localStorage.setItem("account", JSON.stringify({}));
+    parsedAccount = {};
+  } else {
+    // Parse the existing JSON string into a JavaScript object
+    parsedAccount = JSON.parse(accountInLocalStorage);
+  }
+
+  // Check if "sign-out" exists in localStorage
+  if (!signOutInLocalStorage) {
+    // If not, initialize it with "false"
+    localStorage.setItem("sign-out", JSON.stringify(false));
+    parsedSignOut = false;
+  } else {
+    // Parse the existing JSON string into a JavaScript boolean
+    parsedSignOut = JSON.parse(signOutInLocalStorage);
+  }
+};
+
 export const ShoppingContext = ({ children }) => {
+  // My account and Sign Out
+  const [account, setAccount] = useState({});
+  const [signOut, setSignOut] = useState(false);
+
   /**
    * UI State Management
    * Controls visibility of product details and order summary
@@ -159,6 +191,10 @@ export const ShoppingContext = ({ children }) => {
         searchByCategory,
         setSearchByCategory,
         filteredItems,
+        account,
+        setAccount,
+        signOut,
+        setSignOut,
       }}
     >
       {children}

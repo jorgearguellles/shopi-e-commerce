@@ -4,18 +4,77 @@ import { ShopContext } from "../../Context";
 
 export const Navbar = () => {
   const activeStyle = "underline underline-offset-4";
-  const { cartProducts, setSearchByCategory } = useContext(ShopContext);
+  const { cartProducts, setSearchByCategory, setSignOut, signOut } =
+    useContext(ShopContext);
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Detecta el scroll para cambiar el fondo de la navbar
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 70);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Sign Out
+  const signOutLocalStorage = localStorage.getItem("sign-out");
+  const parsedSignOut = JSON.parse(signOutLocalStorage);
+  const isUserSignOut = signOut || parsedSignOut;
+
+  const handleSignOut = () => {
+    const stringifiedSignOut = JSON.stringify(true);
+    localStorage.setItem("sign-out", stringifiedSignOut);
+    setSignOut(true);
+  };
+
+  const renderView = () => {
+    if (isUserSignOut) {
+      return (
+        <li>
+          <NavLink
+            to="/sign-in"
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => handleSignOut()}
+          >
+            Sign out
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <>
+          <li className="text-black/60">teff@platzi.com</li>
+          <li>
+            <NavLink
+              to="/my-orders"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              My Orders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-account"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              My Account
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/sign-in"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => handleSignOut()}
+            >
+              Sign out
+            </NavLink>
+          </li>
+        </>
+      );
+    }
+  };
 
   return (
     <nav
@@ -79,7 +138,7 @@ export const Navbar = () => {
 
       {/* Sección derecha */}
       <ul className="flex items-center gap-3">
-        <li className="text-black/40">jorge@email.com</li>
+        {/* <li className="text-black/40">jorge@email.com</li>
         <li>
           <NavLink
             to="/my-orders"
@@ -100,10 +159,12 @@ export const Navbar = () => {
           <NavLink
             to="/sign-in"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={() => handleSignOut()}
           >
-            Sign In
+            Sign Out
           </NavLink>
-        </li>
+        </li> */}
+        {renderView()}
         <li>🛒 {cartProducts?.length}</li>
       </ul>
     </nav>
