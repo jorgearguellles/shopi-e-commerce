@@ -32,6 +32,7 @@ export function SignIn() {
     const formData = new FormData(form.current);
     const data = {
       name: formData.get("name"),
+      lastName: formData.get("last-name"),
       email: formData.get("email"),
       password: formData.get("password"),
     };
@@ -96,6 +97,20 @@ export function SignIn() {
             name="name"
             defaultValue={parsedAccount?.name}
             placeholder="Peter"
+            className="rounded-lg border border-black placeholder:font-light
+            placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="last-name" className="font-light text-sm">
+            Your last name:
+          </label>
+          <input
+            type="text"
+            id="last-name"
+            name="last-name"
+            defaultValue={parsedAccount?.lastName}
+            placeholder="last name"
             className="rounded-lg border border-black placeholder:font-light
             placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4"
           />

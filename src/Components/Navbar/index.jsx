@@ -45,7 +45,7 @@ export const Navbar = () => {
     if (hasUserAnAccount && !isUserSignOut) {
       return (
         <>
-          <li className="text-black/60">jorge@email.com</li>
+          <li className="text-black/60">{parsedAccount?.email}</li>
           <li>
             <NavLink
               to="/my-orders"
