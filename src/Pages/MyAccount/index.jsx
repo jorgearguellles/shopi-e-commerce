@@ -10,8 +10,8 @@ export const MyAccount = () => {
   const [view, setView] = useState("user-info");
 
   // Retrieve account data from localStorage
-  const account = localStorage.getItem("account");
-  const parsedAccount = JSON.parse(account);
+  const accountLocalStorage = localStorage.getItem("account");
+  const parsedAccount = JSON.parse(accountLocalStorage);
 
   // Reference for the edit form
   const form = useRef(null);

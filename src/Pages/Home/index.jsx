@@ -64,70 +64,16 @@ export const Home = () => {
         </form>
       </div>
       {/* Grid layout for displaying filtered items */}
-      <div className="grid gap-10 grid-cols-4 w-full max-w-screen-lg mt-10">
-        {renderView()} {/* Render the filtered items or a message */}
+      <div className="flex justify-center">
+        <div
+          className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+                  w-full max-w-screen-lg mx-auto mt-8 sm:mt-10 px-4 sm:px-0"
+        >
+          {renderView()}
+        </div>
       </div>
       {/* Product details component (could show details of selected item) */}
       <ProductDetail />
     </Layout>
   );
 };
-
-// import { useContext } from "react";
-// import { ShopContext } from "../../Context"; // Adjust the path as necessary
-// import { Card } from "../../Components/Card";
-// import { Layout } from "../../Components/Layout";
-// import { ProductDetail } from "../../Components/ProductDetail";
-
-// export const Home = () => {
-//   const { searchByTitle, setSearchByTitle, filteredItems } =
-//     useContext(ShopContext);
-
-//   const handleChange = (event) => {
-//     setSearchByTitle(event.target.value);
-//   };
-
-//   const handleSearch = (event) => {
-//     event.preventDefault();
-//     setSearchByTitle("");
-//   };
-
-//   const renderView = () => {
-//     if (filteredItems?.length > 0) {
-//       return filteredItems?.map((item) => {
-//         return <Card key={item.id} productInfo={item} />;
-//       });
-//     } else {
-//       return <div>We do not find any product</div>;
-//     }
-//   };
-
-//   return (
-//     <Layout>
-//       <div className="flex justify-center items-center w-650">
-//         <form
-//           onSubmit={handleSearch}
-//           className="flex px-4 py-2 bg-white rounded-full shadow-md w-650"
-//         >
-//           <input
-//             type="text"
-//             value={searchByTitle}
-//             onChange={handleChange}
-//             placeholder="Find your product"
-//             className="w-full p-2 text-lg text-gray-700 bg-transparent focus:outline-none rounded-full"
-//           />
-//           <button
-//             type="submit"
-//             className="ml-4 p-2 text-lg text-blue-600 hover:text-blue-800 focus:outline-none"
-//           >
-//             🔍
-//           </button>
-//         </form>
-//       </div>
-//       <div className="grid gap-10 grid-cols-4 w-full max-w-screen-lg mt-10">
-//         {renderView()}
-//       </div>
-//       <ProductDetail />
-//     </Layout>
-//   );
-// };
