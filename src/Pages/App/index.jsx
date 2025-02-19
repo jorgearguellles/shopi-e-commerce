@@ -1,5 +1,10 @@
-import { useRoutes, BrowserRouter } from "react-router-dom";
-import { ShoppingContext } from "../../Context";
+import { useContext } from "react";
+import { useRoutes, BrowserRouter, Navigate } from "react-router-dom";
+import {
+  ShoppingContext,
+  initializeLocalStorage,
+  ShopContext,
+} from "../../Context";
 import { Home } from "../Home";
 import { MyAccount } from "../MyAccount";
 import { MyOrders } from "../MyOrders";
@@ -12,13 +17,76 @@ import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import "./App.css";
 
 const AppRoutes = () => {
+  const { signOut, account } = useContext(ShopContext);
+  // Account
+  const accountLocalStorage = localStorage.getItem("account");
+  const parsedAccount = JSON.parse(accountLocalStorage);
+  // Sign Out
+  const signOutLocalStorage = localStorage.getItem("sign-out");
+  const parsedSignOut = JSON.parse(signOutLocalStorage);
+  // Has an account
+  const noAccountInLocalStorage = parsedAccount
+    ? Object.keys(parsedAccount).length === 0
+    : true;
+  const noAccountInLocalState = Object.keys(account).length === 0;
+  const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState;
+  const isUserSignOut = signOut || parsedSignOut;
+
   let routes = useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "/shopi-e-commerce/", element: <Home /> },
-    { path: "/men-clothes", element: <Home /> },
-    { path: "/women-clothes", element: <Home /> },
-    { path: "/electronics", element: <Home /> },
-    { path: "/jewelery", element: <Home /> },
+    {
+      path: "/",
+      element:
+        hasUserAnAccount && !isUserSignOut ? (
+          <Home />
+        ) : (
+          <Navigate replace to={"/sign-in"} />
+        ),
+    },
+    {
+      path: "/shopi-e-commerce/",
+      element:
+        hasUserAnAccount && !isUserSignOut ? (
+          <Home />
+        ) : (
+          <Navigate replace to={"/sign-in"} />
+        ),
+    },
+    {
+      path: "/men-clothes",
+      element:
+        hasUserAnAccount && !isUserSignOut ? (
+          <Home />
+        ) : (
+          <Navigate replace to={"/sign-in"} />
+        ),
+    },
+    {
+      path: "/women-clothes",
+      element:
+        hasUserAnAccount && !isUserSignOut ? (
+          <Home />
+        ) : (
+          <Navigate replace to={"/sign-in"} />
+        ),
+    },
+    {
+      path: "/electronics",
+      element:
+        hasUserAnAccount && !isUserSignOut ? (
+          <Home />
+        ) : (
+          <Navigate replace to={"/sign-in"} />
+        ),
+    },
+    {
+      path: "/jewelery",
+      element:
+        hasUserAnAccount && !isUserSignOut ? (
+          <Home />
+        ) : (
+          <Navigate replace to={"/sign-in"} />
+        ),
+    },
     { path: "/my-account", element: <MyAccount /> },
     { path: "/my-orders", element: <MyOrders /> },
     { path: "/my-orders/last", element: <MyOrder /> },
@@ -31,6 +99,7 @@ const AppRoutes = () => {
 };
 
 const App = () => {
+  initializeLocalStorage();
   return (
     <ShoppingContext>
       <BrowserRouter>
