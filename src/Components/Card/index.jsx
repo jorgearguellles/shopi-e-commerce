@@ -61,7 +61,7 @@ export const Card = ({ productInfo }) => {
         />
         {renderCartIcon()}
       </figure>
-      <p className="flex justify-between items-center">
+      <p className="flex justify-between items-center mx-3">
         <span className="text-sm font-light truncate">{title}</span>
         <span className="text-lg font-medium">${price}</span>
       </p>
