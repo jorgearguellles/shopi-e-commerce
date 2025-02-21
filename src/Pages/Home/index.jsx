@@ -43,6 +43,7 @@ export const Home = () => {
       <div className="flex justify-center items-center w-650">
         {/* Search form */}
         <form
+          data-testid="search-form"
           onSubmit={handleSearch} // Trigger the search handler on form submission
           className="flex px-4 py-2 bg-white rounded-full shadow-md w-650"
         >

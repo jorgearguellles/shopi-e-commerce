@@ -12,7 +12,11 @@ export function NotFound() {
         transition={{ duration: 0.5 }}
         className="bg-white shadow-lg rounded-2xl p-10 max-w-md"
       >
-        <ShoppingBag size={64} className="text-red-500 mx-auto mb-4" />
+        <ShoppingBag
+          size={64}
+          className="text-red-500 mx-auto mb-4"
+          data-testid="shopping-bag-icon"
+        />
         <h1 className="text-4xl font-bold text-gray-900">
           Oops! Page not found
         </h1>
