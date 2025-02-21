@@ -1,0 +1,24 @@
+name: Feature Testing
+run-name: Runing Unit testing on Feature !
+on:
+  push:
+    branches:
+      - 'feat/*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run unit tests
+        run: npm run test:ci
