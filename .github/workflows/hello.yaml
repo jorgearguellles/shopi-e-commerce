@@ -12,3 +12,7 @@ jobs:
     steps:
       - name: Echo message
         run: echo "Hello Jorge World"
+      - name: Give me Date
+        run: date
+      - name: Give me directory content
+        run: ls -l
